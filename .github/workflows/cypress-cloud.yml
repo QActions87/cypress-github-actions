@@ -10,6 +10,9 @@ on:
 jobs:
  cypress-e2e-electron:
     runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node18.12.0-chrome103-ff107
+      options: --user 1001
     steps:
       - name: Get code
         uses: actions/checkout@v6.0.2
@@ -26,7 +29,11 @@ jobs:
           CYPRESS_RECORD_KEY: 3b4605cd-5079-41ab-87df-c1366aab0d96
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  cypress-e2e-chrome:
+    needs: cypress-e2e-electron
     runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node18.12.0-chrome103-ff107
+      options: --user 1001
     steps:
       - name: Get code
         uses: actions/checkout@v6.0.2
@@ -43,7 +50,11 @@ jobs:
           CYPRESS_RECORD_KEY: 3b4605cd-5079-41ab-87df-c1366aab0d96
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  cypress-e2e-firefox:
+    needs: cypress-e2e-electron
     runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node18.12.0-chrome103-ff107
+      options: --user 1001    
     steps:
       - name: Get code
         uses: actions/checkout@v6.0.2
